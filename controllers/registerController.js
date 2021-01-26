@@ -44,7 +44,7 @@ exports.registerUser = async (req, res) => {
                       .status(202)
                       .json({
                         msg: "Usuario creado con exito",
-                        results: results,
+                        session: payload.user,
                         token,
                       });
                   }
