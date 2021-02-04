@@ -15,7 +15,7 @@ exports.registerUser = async (req, res) => {
     (error, results, fields) => {
       const response = results.length;
       if (response > 0) {
-        return res.status(202).json({ msg: "Ya existe el usuario" });
+        return res.status(202).json({ msg: "Ya existe el usuario", code: 999 });
       }
       bcryptjs.genSalt(10).then((salt) =>
         bcryptjs.hash(password, salt).then((newPassword) => {
@@ -44,6 +44,7 @@ exports.registerUser = async (req, res) => {
                       .status(202)
                       .json({
                         msg: "Usuario creado con exito",
+                        code: 0,
                         session: payload.user,
                         token,
                       });

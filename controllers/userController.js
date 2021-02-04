@@ -21,14 +21,14 @@ exports.getUser = (req, res) => {
         if (response < 1) {
           return res
             .status(202)
-            .json({ msg: "Usuario y/o contraseña incorrecta" });
+            .json({ msg: "Usuario y/o contraseña incorrecta", code: 999 });
         }
          crypt.compare(password, results[0].password).then(verify => {
 
           if (!verify) {
             return res
             .status(202)
-            .json({ msg: "Usuario y/o contraseña incorrecta" });
+            .json({ msg: "Usuario y/o contraseña incorrecta", code: 999 });
           }
 
           const payload = {
@@ -43,7 +43,7 @@ exports.getUser = (req, res) => {
             expiresIn: '365d'
           }, (error, token) => {
             if (error) throw error
-            return res.status(202).json({token, session: payload.user})
+            return res.status(202).json({token, session: payload.user, code: 0})
           })
 
         });
